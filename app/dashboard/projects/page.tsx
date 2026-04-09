@@ -72,7 +72,7 @@ export default function TaskFlowStudio() {
   const handleMissionSelect = (m: Mission) => {
     if (m.id === activeMission.id) return;
     setActiveMission(m);
-    setMessages([{ id: Date.now().toString(), role: 'assistant', content: `Awesome! We've switched over to **${m.title}**. I've updated your code editor and logs. Ready when you are!` }]);
+    setMessages([{ id: crypto.randomUUID(), role: 'assistant', content: `Awesome! We've switched over to **${m.title}**. I've updated your code editor and logs. Ready when you are!` }]);
     setTerminalLogs(prev => [
       ...prev,
       { type: 'SWAP', text: `> Context switched to mission ID: ${m.id}`, color: 'text-primary' },
@@ -82,7 +82,7 @@ export default function TaskFlowStudio() {
   const handleSend = () => {
     if (!inputText.trim()) return;
     
-    const userMsg: Message = { id: Date.now().toString(), role: 'user', content: inputText };
+    const userMsg: Message = { id: crypto.randomUUID(), role: 'user', content: inputText };
     setMessages(prev => [...prev, userMsg]);
     setInputText("");
     setIsTyping(true);
@@ -90,7 +90,7 @@ export default function TaskFlowStudio() {
     setTerminalLogs(prev => [...prev, { type: 'CMD', text: `> executing user command: "${userMsg.content}"`, color: 'text-muted-foreground italic' }]);
 
     setTimeout(() => {
-      const toolMsg: Message = { id: (Date.now()+1).toString(), role: 'tool', content: "Taking a quick look into that for you...", status: 'executing' };
+      const toolMsg: Message = { id: crypto.randomUUID(), role: 'tool', content: "Taking a quick look into that for you...", status: 'executing' };
       setMessages(prev => [...prev, toolMsg]);
       setTerminalLogs(prev => [...prev, { type: 'EXEC', text: '> executing tool: analysis_engine...', color: 'text-muted-foreground italic' }]);
       
@@ -100,7 +100,7 @@ export default function TaskFlowStudio() {
         setTerminalLogs(prev => [...prev, { type: 'OK', text: '[OK] Execution successful. State synchronized.', color: 'text-emerald-400' }]);
 
         setMessages(prev => [...prev, { 
-          id: (Date.now()+2).toString(), 
+          id: crypto.randomUUID(), 
           role: 'assistant', 
           content: `Got it! I'm working on your request: "${userMsg.content.substring(0, 30)}${userMsg.content.length > 30 ? '...' : ''}". I've also updated your progress on this mission. You're doing great! 🚀` 
         }]);

@@ -34,46 +34,47 @@ const sidebarLinks = [
 
 // Enhanced Quick Actions data with better organization make it more interactive and visually appealing
 
+// Quick Actions Component with FlowingMenu integration
+const QuickActionsSection = () => {
+  const flowingItems = [
+    { link: '/create-roadmap', text: 'Tactical Roadmap', image: 'https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800&auto=format&fit=crop' },
+    { link: '/dashboard/projects', text: 'TaskFlow Studio', image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=800&auto=format&fit=crop' },
+    { link: '/dashboard/quiz', text: 'Neural Assessment', image: 'https://images.unsplash.com/photo-1620712943543-bcc4638d71d0?q=80&w=800&auto=format&fit=crop' },
+    { link: '/dashboard/resume', text: 'Resume Engineer', image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=800&auto=format&fit=crop' },
+  ];
+
+  return (
+    <div className="mb-16">
+      <div className="flex items-center justify-between mb-10 px-2">
+        <div>
+          <h2 className="text-4xl font-black uppercase tracking-tighter flex items-center gap-4">
+             CORE <span className="text-primary italic">PROTOCOLS</span>
+             <div className="w-2 h-2 rounded-full bg-primary animate-ping" />
+          </h2>
+          <p className="text-muted-foreground font-medium italic mt-2 opacity-70">Initialize high-frequency execution sequences.</p>
+        </div>
+      </div>
+
+      <div className="h-[400px] lg:h-[600px] relative glass rounded-[3rem] overflow-hidden border-white/5 shadow-2xl">
+        <FlowingMenu 
+          items={flowingItems}
+          speed={12}
+          textColor="rgba(255,255,255,0.9)"
+          bgColor="rgba(10,10,15,0.4)"
+          marqueeBgColor="var(--primary)"
+          marqueeTextColor="#fff"
+          borderColor="rgba(255,255,255,0.05)"
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname()
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  // Quick Actions Component with FlowingMenu integration
-  const QuickActionsSection = () => {
-    const flowingItems = [
-      { link: '/create-roadmap', text: 'Tactical Roadmap', image: 'https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800&auto=format&fit=crop' },
-      { link: '/dashboard/projects', text: 'TaskFlow Studio', image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=800&auto=format&fit=crop' },
-      { link: '/dashboard/quiz', text: 'Neural Assessment', image: 'https://images.unsplash.com/photo-1620712943543-bcc4638d71d0?q=80&w=800&auto=format&fit=crop' },
-      { link: '/dashboard/resume', text: 'Resume Engineer', image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=800&auto=format&fit=crop' },
-    ];
-
-    return (
-      <div className="mb-16">
-        <div className="flex items-center justify-between mb-10 px-2">
-          <div>
-            <h2 className="text-4xl font-black uppercase tracking-tighter flex items-center gap-4">
-               CORE <span className="text-primary italic">PROTOCOLS</span>
-               <div className="w-2 h-2 rounded-full bg-primary animate-ping" />
-            </h2>
-            <p className="text-muted-foreground font-medium italic mt-2 opacity-70">Initialize high-frequency execution sequences.</p>
-          </div>
-        </div>
-
-        <div className="h-[400px] lg:h-[600px] relative glass rounded-[3rem] overflow-hidden border-white/5 shadow-2xl">
-          <FlowingMenu 
-            items={flowingItems}
-            speed={12}
-            textColor="rgba(255,255,255,0.9)"
-            bgColor="rgba(10,10,15,0.4)"
-            marqueeBgColor="var(--primary)"
-            marqueeTextColor="#fff"
-            borderColor="rgba(255,255,255,0.05)"
-          />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex h-screen bg-[#0a0a0f] text-foreground selection:bg-primary/30 antialiased overflow-hidden">
